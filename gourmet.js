@@ -21,6 +21,20 @@ function print(data) {
   console.log(data.results.shop[1].sub_genre_name);
 }
 
+// 課題4-2 検索欄の設置
+let b = document.querySelector('button#search');
+b.addEventListener('click',result);
+
+function result(){
+  let s = document.querySelector('select#key');
+  let id = s.selectedIndex;
+
+  let os = s.querySelectorAll('option');
+  let o = os.item(id);
+  console.log('ジャンル: ' + o.getAttribute('value'));
+  console.log('         ' + o.textContent);
+}
+
 // 課題5-1 の関数 printDom() はここに記述すること
 function printDom(data) {
 
