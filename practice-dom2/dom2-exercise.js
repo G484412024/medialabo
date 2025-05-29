@@ -16,3 +16,32 @@ let gakka = [
 
 //////////////// ここから下にプログラムを書きたそう!
 
+let b = document.querySelector('button#show');
+b.addEventListener('click',show);
+let i = 0;
+
+function show(){
+	//キャンパスの住所
+	if(i !== 0){
+		p.remove();
+	}
+	a = document.querySelector('h2#addr');
+	p = document.createElement('p');
+	a.insertAdjacentElement('afterend',p);
+	p.textContent = campus.address;
+
+	//学科一覧
+	if(i !== 0){
+		u.remove();
+		l.remove();
+	}
+	n = document.querySelector('h2#dept');
+	u = document.createElement('ul');
+	n.insertAdjacentElement('afterend',u);
+	for(let ns of gakka){
+		l = document.createElement('li');
+		u.insertAdjacentElement('beforeend',l);
+    	l.textContent = ns.name;
+	}
+	i++;
+}

@@ -1,0 +1,53 @@
+/*検索結果１件目*/
+table.first{
+    border-collapse: collapse;
+    border: 1px solid;
+    margin-bottom: 20px;
+}
+table.first th,
+table.first td{
+    border: 1px solid;
+}
+table.first th{
+    background-color: #e1feff;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+table.first td{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+table.first tr:nth-of-type(2n){
+    background-color: #f2f2f2;
+}
+
+/*検索結果２件目*/
+table.second{
+    border-collapse: collapse;
+    border: 1px solid;
+}
+table.second th,
+table.second td{
+    border: 1px solid;
+}
+table.second th{
+    background-color: #e1feff;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+table.second td{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+table.second tr:nth-of-type(2n){
+    background-color: #f2f2f2;
+}
+
+/*検索結果n件目の表示*/
+li{
+    font-size: 25px;
+}

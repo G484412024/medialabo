@@ -1,24 +1,24 @@
 
 // 課題3-2 のプログラムはこの関数の中に記述すること
 function print(data) {
-  console.log(data.results.shop[0].access);
-  console.log(data.results.shop[0].address);
-  console.log(data.results.shop[0].budget.name);
-  console.log(data.results.shop[0].catch);
-  console.log(data.results.shop[0].genre.name);
-  console.log(data.results.shop[0].name);
-  console.log(data.results.shop[0].open);
-  console.log(data.results.shop[0].station_name);
-  console.log(data.results.shop[0].sub_genre_name);
-  console.log(data.results.shop[1].access);
-  console.log(data.results.shop[1].address);
-  console.log(data.results.shop[1].budget.name);
-  console.log(data.results.shop[1].catch);
-  console.log(data.results.shop[1].genre.name);
-  console.log(data.results.shop[1].name);
-  console.log(data.results.shop[1].open);
-  console.log(data.results.shop[1].station_name);
-  console.log(data.results.shop[1].sub_genre_name);
+  console.log('店名: ' + data.results.shop[0].name);
+  console.log('アクセス: ' + data.results.shop[0].access);
+  console.log('住所: ' + data.results.shop[0].address);
+  console.log('予算: ' + data.results.shop[0].budget.name);
+  console.log('キャッチコピー: ' + data.results.shop[0].catch);
+  console.log('ジャンル: ' + data.results.shop[0].genre.name);
+  console.log('営業時間: ' + data.results.shop[0].open);
+  console.log('最寄駅: ' + data.results.shop[0].station_name);
+  console.log('サブジャンル: ' + data.results.shop[0].sub_genre.name);
+  console.log('店名: ' + data.results.shop[1].name);
+  console.log('アクセス: ' + data.results.shop[1].access);
+  console.log('住所: ' + data.results.shop[1].address);
+  console.log('予算: ' + data.results.shop[1].budget.name);
+  console.log('キャッチコピー: ' + data.results.shop[1].catch);
+  console.log('ジャンル: ' + data.results.shop[1].genre.name);
+  console.log('営業時間: ' + data.results.shop[1].open);
+  console.log('最寄駅: ' + data.results.shop[1].station_name);
+  console.log('サブジャンル: ' + data.results.shop[1].sub_genre.name);
 }
 
 // 課題4-2 検索欄の設置
@@ -37,7 +37,86 @@ function result(){
 
 // 課題5-1 の関数 printDom() はここに記述すること
 function printDom(data) {
+  //div要素の配置
+  let d = document.createElement('div');
+  d.classList.add('result');
+  let a = document.querySelector('body');
+  a.insertAdjacentElement('beforeend',d);
 
+  //ul,li要素の配置
+  let u = document.createElement('ul');
+  a = document.querySelector('div');
+  a.insertAdjacentElement('beforeend',u);
+
+  let l = document.createElement('li');
+  a = document.querySelector('ul');
+  a.insertAdjacentElement('beforeend',l);
+  l.classList.add('first');
+  l.textContent = '検索結果１件目';
+
+  l = document.createElement('li');
+  a.insertAdjacentElement('beforeend',l);
+  l.classList.add('second');
+  l.textContent = '検索結果２件目';
+
+  //table要素の配置
+  let t = document.createElement('table');
+  a = document.querySelector('li.first');
+  a.insertAdjacentElement('afterend',t);
+  t.classList.add('first')
+
+  t = document.createElement('table');
+  a = document.querySelector('li.second');
+  a.insertAdjacentElement('afterend',t);
+  t.classList.add('second');
+
+  //tbody要素の配置
+  t = document.createElement('tbody');
+  a = document.querySelector('table.first');
+  a.insertAdjacentElement('beforeend',t);
+
+  t = document.createElement('tbody');
+  a = document.querySelector('table.second');
+  a.insertAdjacentElement('beforeend',t);
+
+  d = data.results.shop;
+  let i = 0;
+  //tr要素の配置
+  for(let r of data.results.shop){
+    if(i === 0){
+      let c = table.first;
+    }else if(i === 1){
+      let b = table.second;
+    }
+    t = document.createElement('tr');
+    a = document.querySelector('c tbody');
+    a.insertAdjacentElement('beforeend',t);
+  
+    t = document.createElement('th');
+    a = document.querySelector('table.first > tbody > tr');
+    a.insertAdjacentElement('beforeend',t);
+    t.textContent = '店名';
+  
+    t = document.createElement('td');
+    a = document.querySelector('table.first > tbody > tr');
+    a.insertAdjacentElement('beforeend',t);
+    t.textContent = r[i].name;
+  
+  
+    t = document.createElement('tr');
+    a = document.querySelector('table.first tbody');
+    a.insertAdjacentElement('beforeend',t);
+  
+    t = document.createElement('th');
+    a = document.querySelector('table.first > tbody > tr + tr');
+    a.insertAdjacentElement('beforeend',t);
+    t.textContent = 'アクセス';
+  
+    t = document.createElement('td');
+    a = document.querySelector('table.first > tbody > tr + tr');
+    a.insertAdjacentElement('beforeend',t);
+    t.textContent = d[i].access;
+  }
 }
 
 // 課題6-1 のイベントハンドラ登録処理は以下に記述
