@@ -1,4 +1,7 @@
-
+//状態の管理
+let i = 0;  //検索結果削除判断用
+let j = 0;  //前状態の記憶
+  
 // 課題3-2 のプログラムはこの関数の中に記述すること
 function print(data) {
   console.log('店名: ' + data.results.shop[0].name);
@@ -22,7 +25,7 @@ function print(data) {
 }
 
 // 課題4-2 検索欄の設置
-let b = document.querySelector('button#search');
+let b = document.querySelector('button#serch');
 b.addEventListener('click',result);
 
 function result(){
@@ -31,107 +34,258 @@ function result(){
 
   let os = s.querySelectorAll('option');
   let o = os.item(id);
+
   console.log('ジャンル: ' + o.getAttribute('value'));
   console.log('         ' + o.textContent);
 }
 
 // 課題5-1 の関数 printDom() はここに記述すること
 function printDom(data) {
+  a = document.querySelector('p');
+  a.textContent = data.results.results_returned + '件ヒットしました';
+  a = document.querySelector('p + p');
+  a.textContent = '画像をクリックするとページを移動します';
+  if(data.results.results_returned === '0'){
+    a = document.querySelector('p + p');
+    a.textContent = '';
+  }
+
   //div要素の配置
   let d = document.createElement('div');
   d.classList.add('result');
-  let a = document.querySelector('body');
+  a = document.querySelector('body');
   a.insertAdjacentElement('beforeend',d);
 
-  //ul,li要素の配置
+  //ul要素の配置
   let u = document.createElement('ul');
   a = document.querySelector('div');
   a.insertAdjacentElement('beforeend',u);
 
-  let l = document.createElement('li');
-  a = document.querySelector('ul');
-  a.insertAdjacentElement('beforeend',l);
-  l.classList.add('first');
-  l.textContent = '検索結果１件目';
+  for(let i = 0; i < data.results.results_returned; i = i + 1){
+    let n = 'table.No' + (i + 1);
+    
+    //li要素の配置
+    let l = document.createElement('li');
+    a = document.querySelector('ul');
+    a.insertAdjacentElement('beforeend',l);
+    l.classList.add('No' + (i + 1));
+    l.textContent = '検索結果' + (i + 1) + '件目';
 
-  l = document.createElement('li');
-  a.insertAdjacentElement('beforeend',l);
-  l.classList.add('second');
-  l.textContent = '検索結果２件目';
+    //table要素の配置
+    let t = document.createElement('table');
+    a = document.querySelector('li.No' + (i + 1));
+    a.insertAdjacentElement('afterend',t);
+    t.classList.add('No' + (i + 1));
 
-  //table要素の配置
-  let t = document.createElement('table');
-  a = document.querySelector('li.first');
-  a.insertAdjacentElement('afterend',t);
-  t.classList.add('first')
-
-  t = document.createElement('table');
-  a = document.querySelector('li.second');
-  a.insertAdjacentElement('afterend',t);
-  t.classList.add('second');
-
-  //tbody要素の配置
-  t = document.createElement('tbody');
-  a = document.querySelector('table.first');
-  a.insertAdjacentElement('beforeend',t);
-
-  t = document.createElement('tbody');
-  a = document.querySelector('table.second');
-  a.insertAdjacentElement('beforeend',t);
-
-  d = data.results.shop;
-  let i = 0;
-  //tr要素の配置
-  for(let r of data.results.shop){
-    if(i === 0){
-      let c = table.first;
-    }else if(i === 1){
-      let b = table.second;
-    }
-    t = document.createElement('tr');
-    a = document.querySelector('c tbody');
+    //tbody要素の配置
+    t = document.createElement('tbody');
+    a = document.querySelector(n);
     a.insertAdjacentElement('beforeend',t);
-  
+    
+    //tr,th,td要素の設置
+    d = data.results.shop;
+    let r = n + ' tbody > tr';
+    t = document.createElement('tr');
+    a = document.querySelector(n + ' tbody');
+    a.insertAdjacentElement('beforeend',t);
+
     t = document.createElement('th');
-    a = document.querySelector('table.first > tbody > tr');
+    a = document.querySelector(r);
     a.insertAdjacentElement('beforeend',t);
     t.textContent = '店名';
   
     t = document.createElement('td');
-    a = document.querySelector('table.first > tbody > tr');
+    a = document.querySelector(r);
     a.insertAdjacentElement('beforeend',t);
-    t.textContent = r[i].name;
+    t.textContent = d[i].name;
   
   
     t = document.createElement('tr');
-    a = document.querySelector('table.first tbody');
+    a = document.querySelector(n + ' tbody');
     a.insertAdjacentElement('beforeend',t);
   
+    r = r + ' + tr';
     t = document.createElement('th');
-    a = document.querySelector('table.first > tbody > tr + tr');
+    a = document.querySelector(r);
     a.insertAdjacentElement('beforeend',t);
     t.textContent = 'アクセス';
   
     t = document.createElement('td');
-    a = document.querySelector('table.first > tbody > tr + tr');
+    a = document.querySelector(r);
     a.insertAdjacentElement('beforeend',t);
     t.textContent = d[i].access;
+  
+  
+    t = document.createElement('tr');
+    a = document.querySelector(n + ' tbody');
+    a.insertAdjacentElement('beforeend',t);
+  
+    r = r + ' + tr';
+    t = document.createElement('th');
+    a = document.querySelector(r);
+    a.insertAdjacentElement('beforeend',t);
+    t.textContent = '住所';
+  
+    t = document.createElement('td');
+    a = document.querySelector(r);
+    a.insertAdjacentElement('beforeend',t);
+    t.textContent = d[i].address;
+  
+  
+    t = document.createElement('tr');
+    a = document.querySelector(n + ' tbody');
+    a.insertAdjacentElement('beforeend',t);
+  
+    r = r + ' + tr';
+    t = document.createElement('th');
+    a = document.querySelector(r);
+    a.insertAdjacentElement('beforeend',t);
+    t.textContent = '予算';
+  
+    t = document.createElement('td');
+    a = document.querySelector(r);
+    a.insertAdjacentElement('beforeend',t);
+    t.textContent = d[i].budget.name;
+  
+  
+    t = document.createElement('tr');
+    a = document.querySelector(n + ' tbody');
+    a.insertAdjacentElement('beforeend',t);
+  
+    r = r + ' + tr';
+    t = document.createElement('th');
+    a = document.querySelector(r);
+    a.insertAdjacentElement('beforeend',t);
+    t.textContent = 'キャッチコピー';
+  
+    t = document.createElement('td');
+    a = document.querySelector(r);
+    a.insertAdjacentElement('beforeend',t);
+    t.textContent = d[i].catch;
+  
+  
+    t = document.createElement('tr');
+    a = document.querySelector(n + ' tbody');
+    a.insertAdjacentElement('beforeend',t);
+  
+    r = r + ' + tr';
+    t = document.createElement('th');
+    a = document.querySelector(r);
+    a.insertAdjacentElement('beforeend',t);
+    t.textContent = 'ジャンル';
+  
+    t = document.createElement('td');
+    a = document.querySelector(r);
+    a.insertAdjacentElement('beforeend',t);
+    t.textContent = d[i].genre.name;
+  
+  
+    t = document.createElement('tr');
+    a = document.querySelector(n + ' tbody');
+    a.insertAdjacentElement('beforeend',t);
+  
+    r = r + ' + tr';
+    t = document.createElement('th');
+    a = document.querySelector(r);
+    a.insertAdjacentElement('beforeend',t);
+    t.textContent = '営業時間';
+  
+    t = document.createElement('td');
+    a = document.querySelector(r);
+    a.insertAdjacentElement('beforeend',t);
+    t.textContent = d[i].open;
+  
+  
+    t = document.createElement('tr');
+    a = document.querySelector(n + ' tbody');
+    a.insertAdjacentElement('beforeend',t);
+  
+    r = r + ' + tr';
+    t = document.createElement('th');
+    a = document.querySelector(r);
+    a.insertAdjacentElement('beforeend',t);
+    t.textContent = '最寄駅';
+  
+    t = document.createElement('td');
+    a = document.querySelector(r);
+    a.insertAdjacentElement('beforeend',t);
+    t.textContent = d[i].station_name;
+  
+  
+    t = document.createElement('tr');
+    a = document.querySelector(n + ' tbody');
+    a.insertAdjacentElement('beforeend',t);
+   
+    //a要素の配置
+    let u = document.createElement('a');
+    a = document.querySelector('li.No' + (i + 1));
+    a.insertAdjacentElement('afterend',u);
+    u.classList.add('No' + (i + 1));
+    u.setAttribute('href',d[i].urls.pc);
+    u.setAttribute('title',d[i].name);
+    u.setAttribute('target','_blank');
+
+    //img要素の配置
+    let im = document.createElement('img');
+    a = document.querySelector('a.No' + (i + 1));
+    a.insertAdjacentElement('beforeend',im);
+    im.setAttribute('src',d[i].photo.pc.l);
+
+    j = 1;
   }
 }
 
 // 課題6-1 のイベントハンドラ登録処理は以下に記述
-
-
-
+b = document.querySelector('button#serch');
+b.addEventListener('click',sendRequest);
 
 // 課題6-1 のイベントハンドラ sendRequest() の定義
 function sendRequest() {
+  let s = document.querySelector('select#key');
+  let id = s.selectedIndex;
 
+  let os = s.querySelectorAll('option');
+  let o = os.item(id);
+
+  //G000の判別・分岐
+  if(id === 0){
+    if(j === 1){
+      c = document.querySelector('div');
+      c.remove();
+    }
+    a = document.querySelector('p');
+    a.textContent = '検索キーワードを選択してください';
+    a = document.querySelector('p + p');
+    a.textContent = '';
+    j = 0;
+  }else{
+    let url = 'https://www.nishita-lab.org/web-contents/jsons/hotpepper/' + o.value + '.json'
+    axios.get(url)
+    .then(showResult)
+    .catch(showError)
+    .then(finish);
+  }
 }
 
 // 課題6-1: 通信が成功した時の処理は以下に記述
 function showResult(resp) {
+  let data = resp.data;
 
+  if(typeof data === 'string'){
+    data = JSON.parse(data);
+  }
+  console.log(data);
+
+  console.log(data.x);
+
+  //G000を除く結果の削除
+  if(i !== 0 && j === 1){
+    c = document.querySelector('div');
+    c.remove();
+  }
+  i=1;
+
+  printDom(data);
 }
 
 // 課題6-1: 通信エラーが発生した時の処理

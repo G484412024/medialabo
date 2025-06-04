@@ -17,10 +17,8 @@ h2{
     margin-top: 0px;
     margin-bottom: 10px;
 }
-h2 + p{
-    background: linear-gradient(90deg,#E2FFA4,white 70%);
-}
 
+/*本テーマについて*/
 div.term{
     background: #e1e1e1;
     margin-bottom: 16px;
@@ -28,6 +26,33 @@ div.term{
 }
 div.term > p + p{
     margin-bottom: 0px;
+}
+
+/*プロジェクト課題*/
+div#project{
+    background-color: #ffefaf;
+    padding-left: 2px;
+    padding-top: 5px;
+    margin-bottom: 5px;
+    border: 1px solid;
+}
+
+/*数当てゲーム*/
+div#kazuate{
+    background-color: #ffefaf;
+    padding-left: 2px;
+    padding-top: 5px;
+    margin-bottom: 5px;
+    border: 1px solid;
+}
+div#kazuate > p{
+    margin-bottom: 5px;
+}
+
+p.url{
+    background: linear-gradient(90deg,#E2FFA4,#ffefaf 70%);
+    margin-bottom: 5px;
+    margin-left: 5px;
 }
 
 h3{
@@ -48,6 +73,18 @@ p em{
 div#zentai > div > p + p{
     margin-bottom: 5px;
     background: linear-gradient(90deg,#E2FFA4,#ffefaf 70%);
+}
+
+div#zentai{
+    margin-bottom: 10px;
+}
+
+div#summary {
+    background-color: #ffefaf;
+    padding-left: 2px;
+    padding-top: 5px;
+    margin-bottom: 5px;
+    border: 1px solid;
 }
 
 /*リンク*/
